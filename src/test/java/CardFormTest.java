@@ -15,13 +15,13 @@ public class CardFormTest {
     private WebDriver driver;
 
     @BeforeAll
-    public static void setupAll(){
+    public static void setupAll() {
         WebDriverManager.chromedriver().setup();
     }
 
 
     @BeforeEach
-    public void beforeEach(){
+    public void beforeEach() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
@@ -30,24 +30,21 @@ public class CardFormTest {
     }
 
     @AfterEach
-    public void afterEach(){
+    public void afterEach() {
         driver.quit();
         driver = null;
     }
 
     @Test
-    void shouldCardForm() throws InterruptedException{
+    void shouldCardForm() throws InterruptedException {
         driver.get("http://localhost:9999");
-        WebElement form = driver.findElement(By.cssSelector("[data-test-id=callback-form]"));
-        form.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Прокопович Мария Владимировна");
-        form.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79142223344");
-        form.findElement(By.cssSelector("[data-test-id=agreement]")).click();
-        form.findElement(By.cssSelector("button.button")).click();
+        driver.findElement(By.cssSelector("[data-test-id=name] input")).sendKeys("Прокопович Мария Владимировна");
+        driver.findElement(By.cssSelector("[data-test-id=phone] input")).sendKeys("+79142223344");
+        driver.findElement(By.cssSelector("[data-test-id=agreement]")).click();
+        driver.findElement(By.cssSelector("button.button")).click();
         String text = driver.findElement(By.cssSelector("[data-test-id=order-success]")).getText();
         assertEquals("Ваша заявка успешно отправлена! Наш менеджер свяжется с вами в ближайшее время.", text.trim());
-
-        Thread.sleep(5000);
-
+        
     }
 
 
